@@ -5,4 +5,4 @@
     - В първия календар можете да изберете всякакъв ден.
     - Във втория можете да изберете само дни от последните 7 дни.
 
-    Live demo - https://main--delightful-sfogliatella-1f1b7d.netlify.app/
+Live demo - https://main--delightful-sfogliatella-1f1b7d.netlify.app/
