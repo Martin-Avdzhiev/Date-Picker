@@ -6,21 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Date Picker</title>
     <link rel="stylesheet" href="./styles.css">
-    <script type="module" src="./index.js"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.esm.js"></script>
     <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/themes/default.css" />
 </head>
 
 <body>
-    <div class="container">
-        <label for="date">Choose a date</label>
-        <duet-date-picker identifier="date"></duet-date-picker>
+    <div class="title-container">
+        <h1>Choose a day</h1>
     </div>
-    <div class="min-max-container">
-        <label for="date">Choose a day from the last 7 days</label>
-        <duet-date-picker identifier="date"></duet-date-picker>
+    <div class="main-container">
+        <div class="container">
+            <label for="date">Default</label>
+            <duet-date-picker identifier="date"></duet-date-picker>
+        </div>
+        <div class="container">
+            <label for="date">From the last 7 days</label>
+            <duet-date-picker identifier="date"></duet-date-picker>
+        </div>
+        <div class="container">
+            <label for="date">Only work days</label>
+            <duet-date-picker identifier="date"></duet-date-picker>
+        </div>
+        <div class="container">
+            <label for="date">From the weekend</label>
+            <duet-date-picker identifier="date"></duet-date-picker>
+        </div>
+        <div class="container">
+            <label for="date">From the American holidays</label>
+            <duet-date-picker identifier="date"></duet-date-picker>
+        </div>
+        <div class="container">
+            <label for="date">From the Bulgarian holidays</label>
+            <duet-date-picker identifier="date"></duet-date-picker>
+        </div>
     </div>
+    <script type="module" src="./index.js"></script>
 </body>
 
 </html>
