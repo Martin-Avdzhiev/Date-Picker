@@ -17,37 +17,25 @@ holidaysPickers[1].isDateDisabled = isBgHoliday;
 const selectedDate = document.createElement("p");
 mainContainer.appendChild(selectedDate);
 let officialHolidays;
-let usaHolidays;
-let bgHolidays;
+let usaHolidays = null;
+let bgHolidays = null;
 document.addEventListener('DOMContentLoaded', async function () {
     officialHolidays = await fetchData();
     usaHolidays = officialHolidays.official_holidays_usa;
     bgHolidays = officialHolidays.official_holidays_bg;
+
 });
 
-defaultPicker.addEventListener("duetChange", function (event) {
-    selectedDate.innerText = `Selected date: ${event.detail.value}`;
-});
+defaultPicker.addEventListener("duetChange", handleDuetChange);
+aWeekAgoPicker.addEventListener("duetChange", handleDuetChange);
+aWorkDaysPicker.addEventListener("duetChange",handleDuetChange);
+aWeekendPicker.addEventListener("duetChange", handleDuetChange);
+holidaysPickers[0].addEventListener("duetChange", handleDuetChange);
+holidaysPickers[1].addEventListener("duetChange", handleDuetChange);
 
 aWeekAgoPicker.addEventListener("duetOpen", function (event) {
     limitRange(6, null, aWeekAgoPicker);
     //* Sets a range from 6 days before today to an unlimited number of days after today for the duet-date-picker.
-});
-
-aWeekAgoPicker.addEventListener("duetChange", function (event) {
-    selectedDate.innerText = `Selected date: ${event.detail.value}`;
-});
-
-aWorkDaysPicker.addEventListener("duetChange", function (event) {
-    selectedDate.innerText = `Selected date: ${event.detail.value}`;
-});
-
-holidaysPickers[0].addEventListener("duetChange", async function (event) {
-    selectedDate.innerText = `Selected date: ${event.detail.value}`;
-
-});
-holidaysPickers[1].addEventListener("duetChange", async function (event) {
-    selectedDate.innerText = `Selected date: ${event.detail.value}`;
 });
 
 function isUsaHoliday(date) {
@@ -61,4 +49,8 @@ function isBgHoliday(date) {
     const day = String(date.getDate()).padStart(2, '0');
     const formattedDate = `${month}-${day}`;
     return !bgHolidays.includes(formattedDate);
+}
+
+function handleDuetChange(event) {
+    selectedDate.innerText = `Selected date: ${event.detail.value}`;
 }
