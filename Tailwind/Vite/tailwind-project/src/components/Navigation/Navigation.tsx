@@ -3,7 +3,10 @@ export default function Navigation() {
     <div className="flex px-6 md:px-12 lg:px-20 xl:px-30 2xl:px-40 py-4 bg-dark-blue text-white">
       <nav className="flex justify-between items-center w-full">
         <p className="text-gray-300">
-          Need help? <span className="text-yellow-400">Send us a ticket.</span>
+          Need help?{" "}
+          <span className="text-yellow-400 cursor-pointer">
+            Send us a ticket.
+          </span>
         </p>
         <ul className="flex items-center">
           <li className="ml-4">
@@ -14,8 +17,8 @@ export default function Navigation() {
           </li>
           <li className="flex justify-center items-center ml-4 gap-1">
             <span>Language:</span>
-            <span className="flex justify-center gap-1 uppercase">
-              Eng
+            <span className="flex justify-center gap-1">
+              <span className="cursor-pointer uppercase">Eng</span>
               <svg
                 className="w-3 pt-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +34,7 @@ export default function Navigation() {
           <li className="flex justify-center items-center ml-4 gap-1">
             <span>Currency:</span>
             <span className="flex justify-center gap-1 uppercase">
-              USD
+              <span className="cursor-pointer uppercase">USD</span>
               <svg
                 className="w-3 pt-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +47,7 @@ export default function Navigation() {
               </svg>
             </span>
           </li>
-          <li className="ml-4">Login</li>
+          <li className="ml-4 cursor-pointer">Login</li>
         </ul>
       </nav>
     </div>
