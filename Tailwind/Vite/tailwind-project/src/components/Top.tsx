@@ -56,7 +56,7 @@ export default function Top() {
                 {language}
               </span>
               {languageDropdown ? (
-                <div className="flex flex-col gap-4 items-start bg-white w-1/2 absolute top-10 left-0 pl-8 py-4">
+                <div className="flex flex-col gap-4 items-start bg-white w-1/2 absolute top-10 left-0 pl-8 py-4 ease-in-out duration-500 opacity-100">
                   {languages
                     .filter((x) => x.code !== language)
                     .map((language) => (
@@ -77,7 +77,27 @@ export default function Top() {
                       </div>
                     ))}
                 </div>
-              ) : null}
+              ) : <div className="flex flex-col gap-4 items-start bg-white w-1/2 absolute top-16 left-0 pl-8 py-4 ease-in-out duration-500 opacity-0">
+              {languages
+                .filter((x) => x.code !== language)
+                .map((language) => (
+                  <div className="flex gap-3 justify-center" key={language.code}>
+                    <img
+                      src={language.flag}
+                      alt={`${language.code}-flag`}
+                    />
+                    <span
+                      className="cursor-pointer text-gray-700"
+                      onClick={() => {
+                        setLanguage(language.code);
+                        setLanguageDropdown(false);
+                      }}
+                    >
+                      {language.code}
+                    </span>
+                  </div>
+                ))}
+            </div>}
               <svg
                 className="w-3 pt-1"
                 xmlns="http://www.w3.org/2000/svg"
