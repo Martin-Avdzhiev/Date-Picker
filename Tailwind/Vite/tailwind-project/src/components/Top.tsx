@@ -50,7 +50,7 @@ export default function Top() {
           <li className="ml-4">
             <img
               src={languages.filter((x) => x.code === language)[0].flag}
-              alt="uk-flag"
+              alt={`${languages.filter((x) => x.code === language)[0].code}-flag`}
             />
           </li>
           {/* Language Dropdown */}
