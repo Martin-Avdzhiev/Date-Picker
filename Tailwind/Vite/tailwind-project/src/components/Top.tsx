@@ -3,7 +3,7 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import TopNavigation from "./TopNavigation";
 
 export default function Top() {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false); // mobile navigation menu
+  const [mobileNavOpen, setMobileNavOpen] = useState(false); // toggle mobile navigation menu
   const toggleMobileNavButton = () => {
     setMobileNavOpen(!mobileNavOpen);
   };
@@ -35,7 +35,7 @@ export default function Top() {
       >
         <AiOutlineClose
           size={20}
-          className="xl:hidden cursor-pointer"
+          className="cursor-pointer"
           onClick={toggleMobileNavButton}
         />
         <ul className="flex flex-col gap-1 px-2 font-bold">
