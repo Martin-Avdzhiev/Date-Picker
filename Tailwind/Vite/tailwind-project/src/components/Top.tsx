@@ -18,6 +18,7 @@ export default function Top() {
               : "translate-y-0 opacity-100"
           } flex flex-row-reverse items-center w-full p-2 md:p-4 lg:p-6 text-white bg-dark-blue`}
         >
+          <TopNavigation />
           <AiOutlineMenu
             size={20}
             className="xl:hidden cursor-pointer"
@@ -46,8 +47,6 @@ export default function Top() {
           <li>Contact</li>
         </ul>
       </div>
-
-      <TopNavigation />
     </div>
   );
 }
