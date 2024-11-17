@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { postTodo } from "./utils";
 import "./App.css";
 
 function App() {
   const [todo, setTodo] = useState("");
+  const [todoResponses, setTodoResponses] = useState<string[]>([]);
 
-  const addTodoHandler = (e:React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {}, [todoResponses]);
+
+  const addTodoHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(!todo.trim()) return;
     console.log(todo);
-    setTodo(""); 
-  }
+    console.log(todoResponses);
+    postTodo(todo).then((data) =>
+      setTodoResponses((prev) => [data.todo, ...prev])
+    );
+    console.log(todoResponses);
+    setTodo("");
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value);
@@ -28,7 +38,10 @@ function App() {
               onChange={handleInputChange}
               placeholder="add todo"
             />
-            <button type="submit" className="button bg-green-500 border border-black px-3 py-2 h-full">
+            <button
+              type="submit"
+              className="button bg-green-500 border border-black px-3 py-2 h-full"
+            >
               Add
             </button>
           </form>
@@ -39,6 +52,24 @@ function App() {
             <p className="w-[25%]">Edit</p>
             <p>Delete</p>
           </div>
+          {todoResponses.length > 0 && (
+            <ul className="todo-list mt-4">
+              {todoResponses.map((todo, index) => (
+                <li
+                  key={index}
+                  className="flex items-center justify-between border-b border-gray-300 py-2"
+                >
+                  <p className="flex-1 text-left text-black">{todo}</p>
+                  <button className="button bg-yellow-500 border border-black px-3 py-1">
+                    Edit
+                  </button>
+                  <button className="button bg-red-500 border border-black px-3 py-1">
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </>
