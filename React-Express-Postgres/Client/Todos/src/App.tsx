@@ -18,17 +18,17 @@ function App() {
       <div className="container flex flex-col gap-12 w-2/4">
         <h1 className="text-black font-medium">Input Todo</h1>
         <div className="flex justify-center mt-2">
-          <form method="POST" onSubmit={addTodoHandler}>
+          <form method="POST" onSubmit={addTodoHandler} className="h-10">
             <label htmlFor="todo"></label>
             <input
-              className="bg-white border border-black p-1 w-96 flex-1 text-black"
+              className="bg-white border border-black p-1 w-96 flex-1 text-black h-full"
               type="text"
               name="todo"
               value={todo}
               onChange={handleInputChange}
               placeholder="add todo"
             />
-            <button type="submit" className="button bg-green-500 border border-black px-3 py-2">
+            <button type="submit" className="button bg-green-500 border border-black px-3 py-2 h-full">
               Add
             </button>
           </form>
