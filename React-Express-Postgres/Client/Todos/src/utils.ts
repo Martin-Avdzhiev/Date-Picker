@@ -1,4 +1,4 @@
-const url = "http://localhost:3000/createTodo";
+const url = "http://localhost:3000/todos";
 async function postTodo(todo: string) {
     const data = { todo };
     try {
