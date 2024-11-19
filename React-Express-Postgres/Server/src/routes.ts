@@ -1,6 +1,11 @@
 import { Router, Request, Response } from 'express';
 import pool from './db';
 
+type TodoType = {
+  todo_id:number;
+  description:string
+}
+
 const router = Router();
 
 router.get('/todos', async (req: Request, res: Response) => {
@@ -25,6 +30,27 @@ router.post('/todos', async (req: Request, res: Response) => {
   }
 });
 
+router.put('/todos/:id', async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { todo }: {todo: TodoType} = req.body;
+    const updateTodo = await pool.query(
+      "UPDATE todo SET description = $1 WHERE todo_id = $2 RETURNING *",
+      [todo.description, id]
+    );
+
+    if (updateTodo.rowCount === 0) {
+      res.status(404).json({ error: "Todo not found" });
+      return;
+    }
+    const updatedTodo = updateTodo.rows[0];
+    res.json({ message: `Todo with id ${id} has been updated successfully!`, updatedTodo });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 router.delete('/todos/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -42,26 +68,5 @@ router.delete('/todos/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.put('/todos/:id', async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const { description } = req.body;
-
-    const updateTodo = await pool.query(
-      "UPDATE todo SET description = $1 WHERE id = $2",
-      [description, id]
-    );
-
-    if (updateTodo.rowCount === 0) {
-      res.status(404).json({ error: "Todo not found" });
-      return;
-    }
-
-    res.json({ message: `Todo with id ${id} has been updated successfully!`, description });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
-  }
-});
 
 export default router;

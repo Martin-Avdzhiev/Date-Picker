@@ -36,6 +36,7 @@ function App() {
               className="bg-white border border-black p-1 w-96 flex-1 text-black h-full"
               type="text"
               name="todo"
+              id="todo"
               value={todo}
               onChange={handleInputChange}
               placeholder="add todo"
