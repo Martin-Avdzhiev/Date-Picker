@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
-import { postTodo } from "./utils";
+import { getTodos, postTodo } from "./utils";
+import TodoType from "./types";
+import Todo from "./components/Todo";
 import "./App.css";
 
 function App() {
   const [todo, setTodo] = useState("");
-  const [todoResponses, setTodoResponses] = useState<string[]>([]);
+  const [todoResponses, setTodoResponses] = useState<TodoType[]>([]);
 
-  useEffect(() => {}, [todoResponses]);
+  useEffect( () => {
+      getTodos().then((x) => setTodoResponses(x!)).catch((error) => console.error(error));
+  }, []);
 
   const addTodoHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(!todo.trim()) return;
-    console.log(todo);
-    console.log(todoResponses);
-    postTodo(todo).then((data) =>
-      setTodoResponses((prev) => [data.todo, ...prev])
+    postTodo(todo).then((data:TodoType) =>{
+      setTodoResponses((prev) => [data, ...prev])
+    }
     );
-    console.log(todoResponses);
     setTodo("");
   };
 
@@ -54,19 +56,8 @@ function App() {
           </div>
           {todoResponses.length > 0 && (
             <ul className="todo-list mt-4">
-              {todoResponses.map((todo, index) => (
-                <li
-                  key={index}
-                  className="flex items-center justify-between border-b border-gray-300 py-2"
-                >
-                  <p className="flex-1 text-left text-black">{todo}</p>
-                  <button className="button bg-yellow-500 border border-black px-3 py-1">
-                    Edit
-                  </button>
-                  <button className="button bg-red-500 border border-black px-3 py-1">
-                    Delete
-                  </button>
-                </li>
+              {todoResponses.map((todo) => (
+                <Todo todo={todo} key={todo.todo_id}/>
               ))}
             </ul>
           )}

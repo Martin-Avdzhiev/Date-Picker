@@ -1,6 +1,23 @@
+import TodoType from "./types";
+
 const url = "http://localhost:3000/todos";
-async function postTodo(todo: string) {
-    const data = { todo };
+
+async function getTodos() {
+    try {
+        const response = await fetch(url)
+        if (response.ok) {
+            const responseData:TodoType[] = await response.json();
+            return responseData.reverse();
+        } else {
+            console.error('Response error:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Request error:', error);
+    }
+}
+
+async function postTodo(todoData: string) {
+    const data = { todoData };
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -11,7 +28,7 @@ async function postTodo(todo: string) {
         });
         if (response.ok) {
             const responseData = await response.json();
-            return responseData;
+            return responseData.todo;
         } else {
             console.error('Response error:', response.statusText);
         }
@@ -20,4 +37,4 @@ async function postTodo(todo: string) {
     }
 }
 
-export { postTodo };
+export { getTodos, postTodo };

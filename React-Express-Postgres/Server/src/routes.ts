@@ -15,9 +15,10 @@ router.get('/todos', async (req: Request, res: Response) => {
 
 router.post('/todos', async (req: Request, res: Response) => {
   try {
-    const { todo } = req.body;
-    const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1)", [todo]);
-    res.json({ message: `The todo "${todo}" is created successfully!`, todo });
+    const { todoData } = req.body;
+    const insertResult = await pool.query("INSERT INTO todo (description) VALUES($1) RETURNING *", [todoData]);
+    const todo = insertResult.rows[0];
+    res.json({ message: `The todo "${todoData}" is created successfully!`, todo });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
