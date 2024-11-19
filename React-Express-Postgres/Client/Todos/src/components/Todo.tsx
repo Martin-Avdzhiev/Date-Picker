@@ -1,7 +1,11 @@
 import TodoType from "../types";
-
-export default function Todo({ todo }: { todo: TodoType;}) {
-  return (
+import { deleteTodo } from "../utils";
+export default function Todo({ todo, setTodos }: { todo: TodoType, setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>}) {
+  const deleteHandler = (id:number) => {
+    deleteTodo(id);
+    setTodos((todos) => todos.filter((x) => x.todo_id != id));
+  }
+    return (
     <li
       className="flex items-center justify-between border-b border-gray-300 py-2"
     >
@@ -9,7 +13,9 @@ export default function Todo({ todo }: { todo: TodoType;}) {
       <button className="button bg-yellow-500 border border-black px-3 py-1">
         Edit
       </button>
-      <button className="button bg-red-500 border border-black px-3 py-1">
+      <button 
+      onClick={() => deleteHandler(todo.todo_id)}
+      className="button bg-red-500 border border-black px-3 py-1">
         Delete
       </button>
     </li>

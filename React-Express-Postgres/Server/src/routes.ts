@@ -28,7 +28,7 @@ router.post('/todos', async (req: Request, res: Response) => {
 router.delete('/todos/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const deleteTodo = await pool.query("DELETE FROM todo WHERE id = $1", [id]);
+    const deleteTodo = await pool.query("DELETE FROM todo WHERE todo_id = $1", [id]);
 
     if (deleteTodo.rowCount === 0) {
       res.status(404).json({ error: "Todo not found" });

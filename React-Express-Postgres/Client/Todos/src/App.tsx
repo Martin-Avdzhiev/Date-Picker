@@ -6,17 +6,17 @@ import "./App.css";
 
 function App() {
   const [todo, setTodo] = useState("");
-  const [todoResponses, setTodoResponses] = useState<TodoType[]>([]);
+  const [todos, setTodos] = useState<TodoType[]>([]);
 
   useEffect( () => {
-      getTodos().then((x) => setTodoResponses(x!)).catch((error) => console.error(error));
+      getTodos().then((x) => setTodos(x!)).catch((error) => console.error(error));
   }, []);
 
   const addTodoHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(!todo.trim()) return;
     postTodo(todo).then((data:TodoType) =>{
-      setTodoResponses((prev) => [data, ...prev])
+      setTodos((prev) => [data, ...prev])
     }
     );
     setTodo("");
@@ -54,10 +54,10 @@ function App() {
             <p className="w-[25%]">Edit</p>
             <p>Delete</p>
           </div>
-          {todoResponses.length > 0 && (
+          {todos.length > 0 && (
             <ul className="todo-list mt-4">
-              {todoResponses.map((todo) => (
-                <Todo todo={todo} key={todo.todo_id}/>
+              {todos.map((todo) => (
+                <Todo todo={todo} key={todo.todo_id} setTodos={setTodos}/>
               ))}
             </ul>
           )}

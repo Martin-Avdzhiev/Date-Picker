@@ -37,4 +37,20 @@ async function postTodo(todoData: string) {
     }
 }
 
-export { getTodos, postTodo };
+async function deleteTodo(id: number) {
+    try {
+        const response = await fetch(`${url}/${id}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            const responseData = await response.json();
+            return responseData.todo;
+        } else {
+            console.error('Response error:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Request error:', error);
+    }
+}
+
+export { getTodos, postTodo, deleteTodo };
