@@ -1,7 +1,7 @@
 import TodoType from "./types";
 const url:string = import.meta.env.VITE_CONNECTION_STRING;
 console.log(process.env.NODE_ENV)
-console.log(process.env.VITE_CONNECTION_STRING)
+console.log(url)
 
 async function getTodos() {
     try {
