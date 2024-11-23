@@ -1,6 +1,5 @@
 import TodoType from "./types";
-
-const url = "http://localhost:3000/todos";
+const url:string = process.env.CONNECTION_STRING || "http://localhost:3000/todos";
 
 async function getTodos() {
     try {
