@@ -28,9 +28,9 @@ function App() {
   return (
     <>
       <div className="container flex flex-col gap-12 w-2/4">
-        <h1 className="text-black font-medium">Input Todo</h1>
+        <h1 className="text-black font-medium">Todo App</h1>
         <div className="flex justify-center mt-2">
-          <form method="POST" onSubmit={addTodoHandler} className="h-10">
+          <form method="POST" onSubmit={addTodoHandler} className=" flex gap-4 h-10">
             <label htmlFor="todo"></label>
             <input
               className="bg-white border border-black p-1 w-96 flex-1 text-black h-full"
