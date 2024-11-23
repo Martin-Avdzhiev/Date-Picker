@@ -1,9 +1,8 @@
 import TodoType from "./types";
-const url = process.env.NODE_ENV === 'production'
-  ? (process.env.CONNECTION_STRING || "http://localhost:3000/todos")
-  : "http://localhost:3000/todos";
+const url:string = import.meta.env.VITE_CONNECTION_STRING;
 console.log(process.env.NODE_ENV)
-console.log(process.env.CONNECTION_STRING)
+console.log(process.env.VITE_CONNECTION_STRING)
+
 async function getTodos() {
     try {
         const response = await fetch(url)
